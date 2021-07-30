@@ -1,4 +1,4 @@
-# projeto-simples
+# Projeto de Estudo - Olimpiada Vue
 
 ## Project setup
 ```
