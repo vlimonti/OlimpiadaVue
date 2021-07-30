@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="titulo">
-      <h1>Campeonato</h1>
+      <h1>Olimpíada</h1>
       <small>Objetivo: Chegar a 10 pontos!</small>
     </div>
     <div>
