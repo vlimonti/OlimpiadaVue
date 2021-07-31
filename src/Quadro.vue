@@ -4,7 +4,7 @@
       <input type="number" v-model="newOuro" placeholder="Qtde Ouro">
       <input type="number" v-model="newPrata" placeholder="Qtde Prata">
       <input type="number" v-model="newBronze" placeholder="Qtde Bronze">
-      <button @click="addEquipe()">+</button>
+      <button @click="addEquipe()" class="btnAdd">+</button>
       <hr>
       <table class="tabela-medalhas">
           <thead>
@@ -64,28 +64,23 @@ export default {
                     total: (parseInt(qtdOuro) + parseInt(qtdPrata) + parseInt(qtdBronze))
                 }
             });
+
+            this.newOuro = 0
+            this.newPrata = 0
+            this.newBronze = 0
+            this.newTeam = ''
         }
     }
 }
 </script>
 
 <style>
-    .contador span {
-    border-bottom: 1px solid #ccc;
-    height: 30px;
-    padding: 5px 25px;
+    .btnAdd {
+        background-color: rgb(11, 104, 180);
+        color: white;
+        margin-left: 10px;
+        outline: none;
     }
-
-    .contador button {
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
-    background-color: coral;
-    color: white;
-    margin-left: 10px;
-    outline: none;
-    }
-
     .resultado {
         background-color: white;
         color: black;

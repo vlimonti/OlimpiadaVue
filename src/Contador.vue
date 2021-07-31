@@ -5,18 +5,18 @@
             <td>{{ team.nome }}</td>
             <td>
                 <span>{{ team.medalhas.ouro }}</span>
-                <button @click="adicionar('ouro', team.id)">+</button>
-                <button @click="subtrair('ouro', team.id)">-</button>
+                <button @click="adicionar('ouro', team.id)" class="btn-medalha">+</button>
+                <button @click="subtrair('ouro', team.id)" class="btn-medalha">-</button>
             </td>
             <td>
                 <span>{{ team.medalhas.prata }}</span>
-                <button @click="adicionar('prata', team.id)">+</button>
-                <button @click="subtrair('prata', team.id)">-</button>
+                <button @click="adicionar('prata', team.id)" class="btn-medalha">+</button>
+                <button @click="subtrair('prata', team.id)" class="btn-medalha">-</button>
             </td>
             <td>
                 <span>{{ team.medalhas.bronze }}</span>
-                <button @click="adicionar('bronze', team.id)">+</button>
-                <button @click="subtrair('bronze', team.id)">-</button>
+                <button @click="adicionar('bronze', team.id)" class="btn-medalha">+</button>
+                <button @click="subtrair('bronze', team.id)" class="btn-medalha">-</button>
             </td>
             <td>{{ team.medalhas.total }}</td>
         </tr>
@@ -56,11 +56,27 @@ export default {
     computed: {
         sortedTeams: function (){
             return this.teams.slice().sort(function(a, b){
-                if (a.medalhas.total > b.medalhas.total)
+                if (a.medalhas.ouro > b.medalhas.ouro)
                     return -1
-                if (a.medalhas.total < b.medalhas.total)
+                if (a.medalhas.ouro < b.medalhas.ouro)
                     return 1
-                return 0
+                else
+                    if (a.medalhas.prata > b.medalhas.prata)
+                        return -1
+                    if (a.medalhas.prata < b.medalhas.prata)
+                        return 1
+                    else
+                        if (a.medalhas.bronze > b.medalhas.bronze)
+                            return -1
+                        if (a.medalhas.bronze < b.medalhas.bronze)
+                            return 1
+                        else
+                            if (a.nome < b.nome)
+                                return -1
+                            if (a.nome > b.nome)
+                                return 1
+                            else
+                                return 0
             });
         },
     }
@@ -69,19 +85,19 @@ export default {
 
 <style>
     .contador span {
-    border-bottom: 1px solid #ccc;
-    height: 30px;
-    padding: 5px 25px;
+        border-bottom: 1px solid #ccc;
+        height: 30px;
+        padding: 5px 25px;
     }
 
-    .contador button {
-    height: 30px;
-    width: 30px;
-    border-radius: 15px;
-    background-color: coral;
-    color: white;
-    margin-left: 10px;
-    outline: none;
+    .contador button.btn-medalha {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        background-color: coral;
+        color: white;
+        margin-left: 10px;
+        outline: none;
     }
 
     .resultado {
