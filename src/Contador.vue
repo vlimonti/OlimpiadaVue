@@ -56,27 +56,19 @@ export default {
     computed: {
         sortedTeams: function (){
             return this.teams.slice().sort(function(a, b){
-                if (a.medalhas.ouro > b.medalhas.ouro)
+                if (a.medalhas.ouro > b.medalhas.ouro || a.medalhas.prata > b.medalhas.prata || a.medalhas.bronze > b.medalhas.bronze)
                     return -1
-                if (a.medalhas.ouro < b.medalhas.ouro)
+
+                if (a.medalhas.ouro < b.medalhas.ouro || a.medalhas.prata < b.medalhas.prata || a.medalhas.bronze < b.medalhas.bronze)
                     return 1
-                else
-                    if (a.medalhas.prata > b.medalhas.prata)
-                        return -1
-                    if (a.medalhas.prata < b.medalhas.prata)
-                        return 1
-                    else
-                        if (a.medalhas.bronze > b.medalhas.bronze)
-                            return -1
-                        if (a.medalhas.bronze < b.medalhas.bronze)
-                            return 1
-                        else
-                            if (a.nome < b.nome)
-                                return -1
-                            if (a.nome > b.nome)
-                                return 1
-                            else
-                                return 0
+                    
+                if (a.nome < b.nome)
+                    return -1
+
+                if (a.nome > b.nome)
+                    return 1
+
+                return 0
             });
         },
     }
