@@ -1,60 +1,68 @@
 <template>
-  <div class="contador">
-    <span>{{ contador }}</span>
-    <button @click="adicionar">+</button>
-    <button @click="subtrair">-</button>
-    <div v-if="result == true" 
-        :class="cls"
-        class="resultado">{{ msg }}</div>
-  </div>
+    <tbody class="contador">
+        <tr v-for="(team, index) in sortedTeams" :key="team.id">
+            <td>{{ index+1 }}°</td>
+            <td>{{ team.nome }}</td>
+            <td>
+                <span>{{ team.medalhas.ouro }}</span>
+                <button @click="adicionar('ouro', team.id)">+</button>
+                <button @click="subtrair('ouro', team.id)">-</button>
+            </td>
+            <td>
+                <span>{{ team.medalhas.prata }}</span>
+                <button @click="adicionar('prata', team.id)">+</button>
+                <button @click="subtrair('prata', team.id)">-</button>
+            </td>
+            <td>
+                <span>{{ team.medalhas.bronze }}</span>
+                <button @click="adicionar('bronze', team.id)">+</button>
+                <button @click="subtrair('bronze', team.id)">-</button>
+            </td>
+            <td>{{ team.medalhas.total }}</td>
+        </tr>
+    </tbody>
 </template>
 
 <script>
-let posicao = 0;
+
 
 export default {
-    data() {
-        return {
-        contador: 0,
-        result: false,
-        msg: '',
-        cls: ''
-        }
-    },
-    computed: {
-        hasResult() {
-            return this.contador == 10
+    props: {
+        teams: {
+            type: Array,
+            required: true,
         }
     },
     methods: {
-        adicionar() {
-            if (this.result == false) {
-                this.contador++
-            }
-        },
-        subtrair() {
-            if (this.result == false) {
-                if (this.contador > 0) {
-                    this.contador--
+        adicionar(medalha, idTeam) {
+            for(var i=0; i < this.teams.length; i++) {
+                if(this.teams[i].id === idTeam) {
+                    this.teams[i].medalhas[medalha]++
+                    this.teams[i].medalhas.total++
                 }
             }
-        }
+        },
+        subtrair(medalha, idTeam) {
+            for(var i=0; i < this.teams.length; i++) {
+                if(this.teams[i].id === idTeam) {
+                    if (this.teams[i].medalhas[medalha] > 0) {
+                        this.teams[i].medalhas[medalha]--
+                        this.teams[i].medalhas.total--
+                    }
+                }
+            }
+        },
     },
-    watch: {
-        hasResult(value) {
-            if (value) 
-                posicao++
-                this.msg = posicao+"° Lugar"
-                this.result = true
-                if(posicao == 1)
-                    this.cls = 'ouro'
-                else if(posicao == 2)
-                    this.cls = 'prata'
-                else if (posicao == 3)
-                    this.cls = 'bronze'
-                else 
-                    this.cls = ''
-        }
+    computed: {
+        sortedTeams: function (){
+            return this.teams.slice().sort(function(a, b){
+                if (a.medalhas.total > b.medalhas.total)
+                    return -1
+                if (a.medalhas.total < b.medalhas.total)
+                    return 1
+                return 0
+            });
+        },
     }
 }
 </script>

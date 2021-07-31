@@ -1,22 +1,12 @@
 <template>
   <div id="app">
     <div class="titulo">
-      <h1>Olimpíada</h1>
-      <small>Objetivo: Chegar a 10 pontos!</small>
+      <h1>Olimpíadas 2021</h1>
+      <small>Quadro de Medalhas</small>
+      <hr>
+      <app-quadro></app-quadro>
     </div>
-    <div>
-      <hr>
-      <label>Equipe 1</label><app-contador></app-contador>
-      <hr>
-      <label>Equipe 2</label><app-contador></app-contador>
-      <hr>
-      <label>Equipe 3</label><app-contador></app-contador>
-      <hr>
-      <label>Equipe 4</label><app-contador></app-contador>
-      <hr>
-      <label>Equipe 5</label><app-contador></app-contador>
-      <hr>
-    </div>
+   
   </div>
 </template>
 
